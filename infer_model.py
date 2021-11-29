@@ -1,3 +1,5 @@
+import argparse
+
 import torch
 
 from PIL import Image, ImageOps
@@ -44,13 +46,29 @@ class InferModel:
 
     def predict(self, image_tensor):
         out = self.model(image_tensor)
-        return out
+        return out.detach().cpu()
 
     def post_process(self, predictions):
-        idx = torch.topk(predictions, k=1)[1]
-        return self.labels[idx]
+        conf, idx = torch.topk(predictions, k=1)
+        conf = conf.item()
+        return conf, self.labels[idx]
 
     def __call__(self, image_path):
         image_tensor = self.pre_process(image_path)
         prediction = self.predict(image_tensor)
         return self.post_process(prediction)
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-m', '--model', help='Path to model')
+    parser.add_argument('-i', '--image', help='Path to image')
+
+    args = parser.parse_args()
+
+    print('Loading Model')
+    model = InferModel(args.model)
+    print('Model has been loaded')
+    confidence, result = model(args.image)
+    confidence *= 100
+
+    print(f'Image is :: {result} :: {confidence:.2f}% probability')
