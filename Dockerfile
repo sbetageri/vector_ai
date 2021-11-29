@@ -17,6 +17,6 @@ RUN pip3 install --upgrade Pillow
 
 RUN pip3 install torch torchvision 
 
-RUN pip3 install tqdm
+RUN pip3 install tqdm scikit-learn
 
 WORKDIR /root/code
