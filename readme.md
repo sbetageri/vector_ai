@@ -31,7 +31,7 @@ root:
 ...
 ```
 
-python3 download_fmnist.py --root <path_to_dir>
+```python3 download_fmnist.py --root <path_to_dir>```
 
 ## 3. Training and saving model
 
@@ -41,7 +41,7 @@ Training folder has to be in the ImageFolder(pytorch's ImageFolder) format.
 
 Trained model is saved in a directory with a .pt extension
 
-python3 train_model.py --train <path_to_train_dir> -v <val_split_percentage> -e <training_epochs> --out <dir_to_save_model>
+```python3 train_model.py --train <path_to_train_dir> -v <val_split_percentage> -e <training_epochs> --out <dir_to_save_model>```
 
 ## 4. Testing Model on Holdout Set
 
@@ -49,7 +49,7 @@ Tests a given model on a holdout set.
 
 Holdout set has to be in ImageFolder format
 
-python3 test_model.py --model <path_to_model> --test <path_to_holdout_folder>
+```python3 test_model.py --model <path_to_model> --test <path_to_holdout_folder>```
 
 ## 5. Inference
 
@@ -57,4 +57,4 @@ Infer the fashion item of the given image.
 
 Ideally, the labels would be loaded up along with the model too. But I've hardcoded it here. 
 
-python3 infer_model.py -m <path_to_model> -i <path_to_image>
+```python3 infer_model.py -m <path_to_model> -i <path_to_image>```
